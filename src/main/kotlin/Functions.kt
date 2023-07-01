@@ -1,3 +1,4 @@
+import kotlin.math.abs
 import kotlin.math.sqrt
 
 /**
@@ -8,9 +9,13 @@ fun solve(a: Double, b: Double, c: Double, e: Double): Array<Double> {
     val d = b * b - 4 * a * c
     if (d + e < 0) return emptyArray<Double>()
     if (d > e) {
-        val x1 = (-b - sqrt(d)) / (2 * a)
-        val x2 = (-b + sqrt(d)) / (2 * a)
-        return arrayOf(x1, x2)
+        val x0 = (-b - sqrt(d)) / (2 * a)
+        val x1 = (-b + sqrt(d)) / (2 * a)
+        return arrayOf(x0, x1)
+    }
+    if (abs(d) < e) {
+        val x0 = (-b - sqrt(d)) / (2 * a)
+        return arrayOf(x0, x0)
     }
     return emptyArray<Double>()
 }

@@ -8,14 +8,25 @@ class FunctionsKtTest {
 
     @Test
     fun `should return no roots`() {
-        val result = solve(1.0, 0.0, 1.0, epsilon)
+        val result = solve(a = 1.0, b = 0.0, c = 1.0, e = epsilon)
         assertEquals(result.size, 0)
     }
 
     @Test
     fun `should return two different roots`() {
-        val result = solve(1.0, 0.0, -1.0, epsilon)
-        assertEquals(abs(result[0] + 1) < epsilon, true)
-        assertEquals(abs(result[1] - 1) < epsilon, true)
+        val result = solve(a = 1.0, b = 0.0, c = -1.0, e = epsilon)
+        assertEquals(isRootEquals(result[0], -1.0), true)
+        assertEquals(isRootEquals(result[1], 1.0), true)
     }
+
+    @Test
+    fun `should return two identical root`() {
+        val result = solve(a = 1.0, b = 2.0, c = 1.0, e = epsilon)
+        assertEquals(isRootEquals(result[0], -1.0), true)
+        assertEquals(isRootEquals(result[1], -1.0), true)
+    }
+}
+
+private fun isRootEquals(actual: Double, expected: Double): Boolean {
+    return abs(actual - expected) < epsilon
 }
