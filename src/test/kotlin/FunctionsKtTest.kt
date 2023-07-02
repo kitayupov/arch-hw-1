@@ -34,6 +34,12 @@ class FunctionsKtTest {
             solve(a = 0.0, b = 2.0, c = 1.0, e = epsilon)
         }
     }
+
+    @Test
+    fun `should return two identical roots with epsilon`() {
+        val result = solve(a = 1.0, b = 2.0 + 1e-8, c = 1.0, e = epsilon)
+        assertEquals(isRootEquals(result[0], result[1]), true)
+    }
 }
 
 private fun isRootEquals(actual: Double, expected: Double): Boolean {
