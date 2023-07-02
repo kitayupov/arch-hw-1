@@ -40,6 +40,69 @@ class FunctionsKtTest {
         val result = solve(a = 1.0, b = 2.0 + 1e-8, c = 1.0, e = epsilon)
         assertEquals(isRootEquals(result[0], result[1]), true)
     }
+
+    @Test
+    fun `should throw exception when a is NaN`() {
+        assertThrows<IllegalArgumentException> {
+            solve(a = Double.NaN, b = 1.0, c = 1.0, e = epsilon)
+        }
+    }
+
+    @Test
+    fun `should throw exception when b is NaN`() {
+        assertThrows<IllegalArgumentException> {
+            solve(a = 1.0, b = Double.NaN, c = 1.0, e = epsilon)
+        }
+    }
+
+    @Test
+    fun `should throw exception when c is NaN`() {
+        assertThrows<IllegalArgumentException> {
+            solve(a = 1.0, b = 1.0, c = Double.NaN, e = epsilon)
+        }
+    }
+
+    @Test
+    fun `should throw exception when a is negative infinity`() {
+        assertThrows<IllegalArgumentException> {
+            solve(a = Double.NEGATIVE_INFINITY, b = 1.0, c = 1.0, e = epsilon)
+        }
+    }
+
+    @Test
+    fun `should throw exception when a is positive infinity`() {
+        assertThrows<IllegalArgumentException> {
+            solve(a = Double.POSITIVE_INFINITY, b = 1.0, c = 1.0, e = epsilon)
+        }
+    }
+
+    @Test
+    fun `should throw exception when b is negative infinity`() {
+        assertThrows<IllegalArgumentException> {
+            solve(a = 1.0, b = Double.NEGATIVE_INFINITY, c = 1.0, e = epsilon)
+        }
+    }
+
+    @Test
+    fun `should throw exception when b is positive infinity`() {
+        assertThrows<IllegalArgumentException> {
+            solve(a = 1.0, b = Double.POSITIVE_INFINITY, c = 1.0, e = epsilon)
+        }
+    }
+
+    @Test
+    fun `should throw exception when c is negative infinity`() {
+        assertThrows<IllegalArgumentException> {
+            solve(a = 1.0, b = 1.0, c = Double.NEGATIVE_INFINITY, e = epsilon)
+        }
+    }
+
+    @Test
+    fun `should throw exception when c is positive infinity`() {
+        assertThrows<IllegalArgumentException> {
+            solve(a = 1.0, b = 1.0, c = Double.POSITIVE_INFINITY, e = epsilon)
+        }
+    }
 }
 
 private fun isRootEquals(actual: Double, expected: Double): Boolean {
